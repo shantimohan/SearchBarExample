@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SearchBarCancelIssue.Views.SearchPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="tbiCancel"
+                     Clicked="Cancel_Clicked"
+                     Text="Cancel"
+                     Order="Primary">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android, iOS" Value="icon_cross.png"/>
+                    <On Platform="UWP" Value="Icons/icon_cross.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem x:Name="tbiAccept"
+                     Clicked="Accept_Clicked"
+                     Text="Accept"
+                     Order="Primary">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="Android, iOS" Value="icon_check.png"/>
+                    <On Platform="UWP" Value="Icons/icon_check.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="sbSearchData"
+                       TextChanged="sbSearchData_TextChanged"
+                       BackgroundColor="#FBCBF3" />
+            <ListView x:Name="lvSearch"
+                      ItemsSource="{Binding Items}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      ItemTapped="lvSearch_ItemTapped">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Name}" TextColor="Red"
+                                  Detail="{Binding Desc}" DetailColor="Blue" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
