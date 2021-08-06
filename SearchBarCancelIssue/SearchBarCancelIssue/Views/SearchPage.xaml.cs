@@ -55,8 +55,14 @@ namespace SearchBarCancelIssue.Views
         {
             SearchBar sb = (SearchBar)sender;
 
-            itemsVM.searchFilter = sb.Text.Trim().ToLower();
-            itemsVM.LoadItemsCommand.Execute(null);
+            // This test is needed to avoid crashing of iOS app on
+            //    tapping the Cancel button that appears when something
+            //    is entered into the SearchBar's text box.
+            if (!string.IsNullOrEmpty(sb.Text))
+            {
+                itemsVM.searchFilter = sb.Text.Trim().ToLower();
+                itemsVM.LoadItemsCommand.Execute(null);
+            }
         }
     }
 }

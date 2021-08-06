@@ -37,11 +37,12 @@ namespace SearchBarCancelIssue.Views
                 ItemsListView.ItemsSource = page1VM.Items;
             }
 
-            if (ReturningFromSearch)
+            if (ReturningFromSearch &&
+                searchedItem != null)
             {
-                ItemsListView.ScrollTo(searchedItem, Syncfusion.ListView.XForms.ScrollToPosition.Start, true);
-                //ItemsListView.ScrollTo(searchedItem, ScrollToPosition.Center, true);
-                ItemsListView.SelectedItem = searchedItem;
+                Item item = page1VM.Items.Where(x => x.Name == searchedItem.Name).FirstOrDefault();
+                ItemsListView.ScrollTo(searchedItem, ScrollToPosition.Center, true);
+                ItemsListView.SelectedItem = item;
                 ReturningFromSearch = false;
             }
         }
@@ -54,9 +55,9 @@ namespace SearchBarCancelIssue.Views
             ReturningFromSearch = true;
         }
 
-        private async void ItemsListView_ItemTapped(object sender, Syncfusion.ListView.XForms.ItemTappedEventArgs e)
+        private async void ItemsListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Item item = (Item)e.ItemData;
+            Item item = (Item)e.Item;
             await DisplayAlert("Item Details", $"Name: {item.Name}{Environment.NewLine}Desc: {item.Desc}", "Ok");
         }
     }

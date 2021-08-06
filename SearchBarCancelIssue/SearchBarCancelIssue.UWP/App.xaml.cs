@@ -58,9 +58,7 @@ namespace SearchBarCancelIssue.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-List<Assembly> assembliesToInclude = new List<Assembly>();
-assembliesToInclude.Add(typeof(SfListViewRenderer).GetTypeInfo().Assembly);
-Xamarin.Forms.Forms.Init(e, assembliesToInclude);
+                Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
